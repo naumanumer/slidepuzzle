@@ -22,12 +22,13 @@ function initGame(s) {
         numberBoard.push(row)
     }
     $(board).html(boardHtml);
-
 }
 
 $('#size').change(function() {
     var val = $("#size option:selected").val();
-    alert(val);
+    $(board).html("");
+    initGame(val);
+    size = parseInt(val);
 });
 
 
