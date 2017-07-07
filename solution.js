@@ -150,25 +150,10 @@ function solve(){
             moves +=  solveBottomLine(n);
             moves +=  solveRightLine(n);
         }
-        if(!isSolved(n)){
-            console.warn("failed at "+n);
-            tries ++;
-            n++;
-            if(n == 2)
-                n++;
-            if(tries >10){
-                console.warn("Opps! I failed retring.")
-                // shuffle();
-                // return solve();
-            }
-            continue;
-        }
-        tries =0;
     }
     restore(board);
-    //dev = false
+    dev = false
     optimizeMoves(moves);
-    console.log(moves.length);
     return moves;
 }
 
