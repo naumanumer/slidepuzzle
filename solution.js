@@ -54,15 +54,18 @@ function isTileSolved(n){
 }
 
 function isCordSolved(x,y){
-    n = numberBoard[y][x];
-    return isTileSolved(n);
+    return numberBoard[y][x].toString() == getTileFromPos(y,x);
 }
 
 function solve2x2(){
     var tile = numberBoard[1][1];
     var moves =""
     moves += moveTileToPos(tile, {top:1,left:1})
-    move('l');
+    if($('#0').position().top == 90){
+        move('u');
+    }else{
+        move('l');
+    }
     return moves + "l";
 }
 
@@ -76,7 +79,9 @@ function solveBottomLine(size){
         moves += moveTileToPos(tile,{top:0,left:0})
         moves += moveTileToPos(tile,{top:y,left:x})
     }
-    moves += solveEdgeTile({top:size-1, left:0})
+    if(!isCordSolved(0,size-1)){
+        moves += solveEdgeTile({top:size-1, left:0})
+    }
     return moves
 }
 
@@ -90,7 +95,9 @@ function solveRightLine(size){
         moves += moveTileToPos(tile,{top:0,left:0})
         moves += moveTileToPos(tile,{top:y,left:x})
     }
-    moves += solveEdgeTile({top:0, left:size-1})
+    if(!isCordSolved(size-1,0)){
+        moves += solveEdgeTile({top:0, left:size-1})
+    }
     return moves
 }
 
@@ -120,6 +127,17 @@ function cloneBoard(){
     return board;
 }
 
+function optimizeMoves(moves){
+    var cancelableMoves =[
+        "rl", 'lr',
+        'du','ud'
+    ]
+    for(var move of cancelableMoves){
+        moves = moves.replace(move, '');
+    }
+    return moves;
+}
+
 function solve(){
     dev = true;
     var board = cloneBoard();
@@ -140,14 +158,30 @@ function solve(){
                 n++;
             if(tries >10){
                 console.warn("Opps! I failed retring.")
-                restore(board);
-                return solve();
+                // shuffle();
+                // return solve();
             }
             continue;
         }
         tries =0;
     }
     restore(board);
-    dev = false
+    //dev = false
+    optimizeMoves(moves);
+    console.log(moves.length);
     return moves;
 }
+
+function test2x2Algo() {
+    var clone = cloneBoard();
+    solve2x2();
+    return clone;
+}
+
+// Optimization History (5x5)
+// +---+-----------+---------------------+----------------+----------------+
+// | # | avg moves | moves if algo fails |    faliure %   | Optimization % |
+// +---+-----------+---------------------+----------------+----------------+
+// | 1 |    764    |       950-1150      | 0.6(0.3H,0.3S) |       0%       |
+// | 2 |    756    |       940-1140      | 0.6(0.3H,0.3S) |     0.01 %     |
+// | 3 |    753    |     Never Fails     |       0%       |     0.014 %    |
