@@ -1,19 +1,18 @@
 var board = $('#board');
 var TileSize = 90;
-var height;
-var width;
+var size;
 var numberBoard=[];
 var dev = false;
 
-function initGame(h, w) {
+function initGame(s) {
     var n = 0;
-    height = h, width = w;
+    size = s;
     var boardHtml = "";
-    $("#board").height(h * TileSize);
-    $("#board").width(w * TileSize);
-    for (var i = 0; i < height; i++) {
+    $("#board").height(s * TileSize);
+    $("#board").width(s * TileSize);
+    for (var i = 0; i < size; i++) {
         var row=[]
-        for (var j = 0; j < width; j++) {
+        for (var j = 0; j < size; j++) {
             row.push(n);
             var temp = (i == 0 && j == 0) ? 'active' : '';
             boardHtml += '<div class="cell ' + temp + ' cell-' + n + '" style="left:' + j * TileSize + 'px;top:' + i * TileSize + 'px;height:' + (TileSize - 3) + 'px;width:' + (TileSize - 3) + 'px" id="'+n+'">';
@@ -26,5 +25,10 @@ function initGame(h, w) {
 
 }
 
+$('#size').change(function() {
+    var val = $("#size option:selected").val();
+    alert(val);
+});
 
-initGame(5,5)
+
+initGame(4)

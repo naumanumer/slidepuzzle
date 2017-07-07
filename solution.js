@@ -1,5 +1,5 @@
 function getLargestTile(){
-    return height*width-1
+    return size*size-1
 }
 
 function getTilePos(n){
@@ -61,11 +61,7 @@ function solve2x2(){
     var tile = numberBoard[1][1];
     var moves =""
     moves += moveTileToPos(tile, {top:1,left:1})
-    if($('#0').position().top == 90){
-        move('u');
-    }else{
-        move('l');
-    }
+    move('ul');
     return moves + "l";
 }
 
@@ -103,11 +99,11 @@ function solveRightLine(size){
 
 function isSolved(n) {
     n--;
-    for(var x = height-1; x > -1; x--){ // checking row
+    for(var x = size-1; x > -1; x--){ // checking row
         if(numberBoard[x][n].toString() != getTileFromPos(x,n))
             return false;
     }
-    for(var y = width-1; y > -1; y--){ // checking col
+    for(var y = size-1; y > -1; y--){ // checking col
         if(numberBoard[n][y].toString() != getTileFromPos(n,y))
             return false;
     }
@@ -116,9 +112,9 @@ function isSolved(n) {
 
 function cloneBoard(){
     var board=[];
-    for(var y = 0;y <height; y++){
+    for(var y = 0;y <size; y++){
         var row=[]
-        for(var x = 0;x <height; x++){
+        for(var x = 0;x <size; x++){
             var tile = getTileFromPos(y,x)
             row.push(tile)
         }
@@ -143,7 +139,7 @@ function solve(){
     var board = cloneBoard();
     var tries = 0;
     var moves ="";
-    for(var n = height; n > 1; n--){
+    for(var n = size; n > 1; n--){
         if(n ==2){
             moves += solve2x2();
         }else{

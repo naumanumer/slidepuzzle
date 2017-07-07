@@ -14,20 +14,20 @@ function getPosCls(cls){
 
 function getAbsPosFromAddr(addr){
     return {
-        top: (parseInt(addr/width))*TileSize,
-        left: (addr%width)*TileSize
+        top: (parseInt(addr/size))*TileSize,
+        left: (addr%size)*TileSize
     }
 }
 
 function getPosFromAddr(addr){
     return {
-        top: parseInt(addr/width),
-        left: addr%width
+        top: parseInt(addr/size),
+        left: addr%size
     }
 }
 
 function getTileFromPos(top,left){
-    var addr = (top*height)+left;
+    var addr = (top*size)+left;
     return $('.cell-'+addr).attr('id');
 }
 
@@ -56,22 +56,22 @@ function canMove(dir) {
 
     switch (dir) {
         case 'l':
-            if(activeCellAddr % width == 0)
+            if(activeCellAddr % size == 0)
                 return false;
             break;
 
         case 'r':
-            if(activeCellAddr % width == width-1)
+            if(activeCellAddr % size == size-1)
                 return false;
             break;
 
         case 'u':
-            if(parseInt(activeCellAddr/width) == 0)
+            if(parseInt(activeCellAddr/size) == 0)
                 return false;
             break;
 
         case 'd':
-            if(parseInt(activeCellAddr/width) == width-1)
+            if(parseInt(activeCellAddr/size) == size-1)
                 return false;
             break;
         default:
@@ -86,7 +86,7 @@ function move(dir) {
     if(!canMove(dir))
         return;
     var activeCellAddr = cellAddrFromCls($('.active').attr('class'));
-    var dirVal ={ 'l': -1, 'r': 1, 'u': -width, 'd': width}
+    var dirVal ={ 'l': -1, 'r': 1, 'u': -size, 'd': size}
     var nextCellAddr = JSON.parse(JSON.stringify(activeCellAddr)) + dirVal[dir];
 
     $('.active').finish();
@@ -123,7 +123,7 @@ function moveToEnd(dir){
 }
 
 function shuffle(){
-    i = height * width;
+    i = size * size;
     moves = ['r', 'l', 'd', 'u']
     while(i!=0){
         var dir = moves[randomIntFromInterval(0,3)]
@@ -239,9 +239,9 @@ function moveTileToEnd(n, dir){
     var nPos = getTilePos(n);
     var dirList = {
         'u': {top:0, left: nPos.left},
-        'd': {top: height-1, left: nPos.left},
+        'd': {top: size-1, left: nPos.left},
         'l': {top:nPos.top, left: 0},
-        'r': {top:nPos.top, left: width-1}
+        'r': {top:nPos.top, left: size-1}
     }
     var distPos = dirList[dir];
 
@@ -273,9 +273,9 @@ function moveTileToEnd(n, dir){
 function createRestorePoint(){
     var n =0;
     reversableClone =[]
-    for(var y = 0;y < height; y++){
+    for(var y = 0;y < size; y++){
         var row=[];
-        for(var x=0; x<width; x++){
+        for(var x=0; x<size; x++){
             row.push($('.cell-'+n).attr('id'));
             n++;
         }
@@ -289,8 +289,8 @@ function restore(board){
     if(!board)
         return; // if reversableClone is also null
     var n =0;
-    for(var y = 0;y < height; y++){
-        for(var x=0; x<width; x++){
+    for(var y = 0;y < size; y++){
+        for(var x=0; x<size; x++){
             var text = board[y][x];
             $('.cell-'+n).attr('id', text);
             $('.cell-'+n).text(text);
