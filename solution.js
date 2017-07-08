@@ -61,8 +61,9 @@ function solve2x2(){
     var tile = numberBoard[1][1];
     var moves =""
     moves += moveTileToPos(tile, {top:1,left:1})
+
     move('ul');
-    return moves + "l";
+    return moves + "ul";
 }
 
 function solveBottomLine(size){
