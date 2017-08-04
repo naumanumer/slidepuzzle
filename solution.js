@@ -91,8 +91,10 @@ function solveRightLine(size){
     for(var y =size-2; y> 0; y--){
         var tile = numberBoard[y][x];
         //TODO: optimize method to reduce number of moves
-        moves += moveTileToPos(tile,{top:0,left:0})
-        moves += moveTileToPos(tile,{top:y,left:x})
+        if(!isCordSolved(x,y)){
+            moves += moveTileToPos(tile,{top:0,left:0})
+            moves += moveTileToPos(tile,{top:y,left:x})
+        }
     }
     if(!isCordSolved(size-1,0)){
         moves += solveEdgeTile({top:0, left:size-1})
@@ -138,6 +140,7 @@ function optimizeMoves(moves){
 }
 
 function solve(){
+    temp = dev;
     dev = true;
     var board = cloneBoard();
     var tries = 0;
@@ -152,9 +155,30 @@ function solve(){
     }
     restore(board);
     dev = false
-    optimizeMoves(moves);
-    console.log(moves.length);
+    moves = optimizeMoves(moves);
+    if(!temp){
+        console.log(`Solved in ${moves.length} moves`);
+    }
     return moves;
+}
+
+function getAvgMoves() {
+    var board = cloneBoard();
+    var moves =[];
+    for(var x=0; x< 10; x++){
+        dev = true;
+        shuffle();
+        shuffle();
+        shuffle();
+        moves.push(solve().length);
+    }
+    moves.sort(function(a,b){
+        return a>b;
+    })
+    restore(board);
+    var avg = parseInt((moves[0]+moves[9])/2);
+    console.log("Average Moves: ", avg);
+    console.log("Moves Optimization %: ", 1-(avg/764));
 }
 
 // Optimization History (5x5)
@@ -164,4 +188,5 @@ function solve(){
 // | 1 |    764    |       950-1150      | 0.6(0.3H,0.3S) |       0%       |
 // | 2 |    756    |       940-1140      | 0.6(0.3H,0.3S) |     0.01 %     |
 // | 3 |    753    |     Never Fails     |       0%       |     0.014 %    |
-// | 4 |    327    |     Never Fails     |       0%       |     42.8 %     |
+// | 4 |    327    |     Never Fails     |       0%       |     57.1 %     |
+// | 5 |    299    |     Never Fails     |       0%       |     60.8 %     |
