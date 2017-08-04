@@ -8,6 +8,7 @@ function initGame(s) {
     var n = 0;
     size = s;
     var boardHtml = "";
+    numberBoard=[];
     $("#board").height(s * TileSize);
     $("#board").width(s * TileSize);
     for (var i = 0; i < size; i++) {

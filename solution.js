@@ -73,8 +73,10 @@ function solveBottomLine(size){
     for(var x =size-1; x> 0; x--){
         var tile = numberBoard[y][x]
         //TODO: optimize method to reduce number of moves
-        moves += moveTileToPos(tile,{top:0,left:0})
-        moves += moveTileToPos(tile,{top:y,left:x})
+        if(!isCordSolved(x,y)){
+            moves += moveTileToPos(tile,{top:0,left:0})
+            moves += moveTileToPos(tile,{top:y,left:x})
+        }
     }
     if(!isCordSolved(0,size-1)){
         moves += solveEdgeTile({top:size-1, left:0})
@@ -151,13 +153,8 @@ function solve(){
     restore(board);
     dev = false
     optimizeMoves(moves);
+    console.log(moves.length);
     return moves;
-}
-
-function test2x2Algo() {
-    var clone = cloneBoard();
-    solve2x2();
-    return clone;
 }
 
 // Optimization History (5x5)
@@ -167,3 +164,4 @@ function test2x2Algo() {
 // | 1 |    764    |       950-1150      | 0.6(0.3H,0.3S) |       0%       |
 // | 2 |    756    |       940-1140      | 0.6(0.3H,0.3S) |     0.01 %     |
 // | 3 |    753    |     Never Fails     |       0%       |     0.014 %    |
+// | 4 |    327    |     Never Fails     |       0%       |     42.8 %     |
