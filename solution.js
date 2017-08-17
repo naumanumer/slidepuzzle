@@ -140,11 +140,13 @@ function optimizeMoves(moves){
 }
 
 function solve(){
+    writeOnConsole("Solving...");
     temp = dev;
     dev = true;
     var board = cloneBoard();
     var tries = 0;
     var moves ="";
+    
     for(var n = size; n > 1; n--){
         if(n ==2){
             moves += solve2x2();
@@ -156,9 +158,10 @@ function solve(){
     restore(board);
     dev = false
     moves = optimizeMoves(moves);
-    if(!temp){
-        console.log(`Solved in ${moves.length} moves`);
-    }
+    if(moves.length == 1)
+        writeOnConsole(`Already Solved`);
+    else
+        writeOnConsole(`Solved in ${moves.length} moves`);
     return moves;
 }
 

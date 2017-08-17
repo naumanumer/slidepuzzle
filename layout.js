@@ -23,6 +23,8 @@ function initGame(s) {
         numberBoard.push(row)
     }
     $(board).html(boardHtml);
+
+    writeOnConsole(`Initialized ${size}x${size} board`);
 }
 
 $('#size').change(function() {
@@ -33,4 +35,20 @@ $('#size').change(function() {
 });
 
 
+writeOnConsole("Slide Puzzle (c) Nauman Umer");
+writeOnConsole("Info: Use Arrow keys to move tiles.", "rgb(97, 175, 255)");
+writeOnConsole("Warn: As game board and solver are", "rgb(245, 189, 0)");
+writeOnConsole(" working async so assigning two tasks", "rgb(245, 189, 0)");
+writeOnConsole(" at the same time can result any", "rgb(245, 189, 0)");
+writeOnConsole(" unexpected result.", "rgb(245, 189, 0)");
+writeOnConsole(" ");
+
 initGame(4)
+
+
+function writeOnConsole(text, color) {
+    (!color) && (color = "#ccc");
+    var d = $('#console');
+    d.html(d.html()+`<pre style="color: ${color}">${text}</pre>`);
+    d.scrollTop(d.prop("scrollHeight"));
+}

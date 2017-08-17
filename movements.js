@@ -123,6 +123,7 @@ function moveToEnd(dir){
 }
 
 function shuffle(){
+    writeOnConsole("Shuffling...");
     i = size * size;
     moves = ['r', 'l', 'd', 'u']
     while(i!=0){
