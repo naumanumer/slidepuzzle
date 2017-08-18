@@ -10,6 +10,10 @@ body{
     overflow: hidden;
     font-family: -apple-system,BlinkMacSystemFont,Segoe WPC,Segoe UI,HelveticaNeue-Light,Ubuntu,Droid Sans,sans-serif;
     font-weight: 200;
+    -webkit-user-select: none;
+    cursor: default;
+    min-width: 735px;
+    min-height: 500px;
 }
 
 #board{
@@ -19,6 +23,7 @@ body{
     font-size: 20px;
     position: relative;
     left: -150px;
+    bottom: -25px;
 }
 
 #board .cell{
@@ -118,3 +123,19 @@ select, button{
     right: 40px;
     top: 8px;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border: 2px solid #666;    
+    width: 10px;
+    border-radius: 5px;
+  }

@@ -1,24 +1,25 @@
 <!doctype html>
 <html>
-    <head>
-        <title>Board Puzzle</title>
-        <link rel="stylesheet" href="./style.css" />
 
-        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-    </head>
+<head>
+    <title>Board Puzzle</title>
+    <link rel="stylesheet" href="./style.css" />
 
-    <body>
-        <div id="board"></div>
-        
-        <div id="controls">
-            <div class="logo">
-                <span>Slide</span><span>Puzzle</span>
-            </div>
-            <div style="position: absolute;width: 100%;text-align: center;">
-                <button type="button" onClick="moveUsingMoves(solve())"><span class="lnr lnr-dice"></span>Solve</button>
-                <button type="button" onClick="shuffle()"><span class="lnr lnr-sync"></span>Shuffle</button>
-                <select id="size">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body>
+    <div id="board"></div>
+
+    <div id="controls">
+        <div class="logo">
+            <span>Slide</span><span>Puzzle</span>
+        </div>
+        <div style="position: absolute;width: 100%;text-align: center;">
+            <button type="button" onClick="moveUsingMoves(solve())"><span class="lnr lnr-dice"></span>Solve</button>
+            <button type="button" onClick="shuffle()"><span class="lnr lnr-sync"></span>Shuffle</button>
+            <select id="size">
                     <option value="2">2x2</option>
                     <option value="3">3x3</option>
                     <option value="4" selected>4x4</option>
@@ -26,18 +27,26 @@
                     <option value="6">6x6</option>
                     <option value="7">7x7</option>
                 </select>
-            </div>
-
-            <div class="github">
-                <a class="github-button" href="https://github.com/naumanumer/slidepuzzle/fork" data-size="large" data-show-count="true" aria-label="Fork naumanumer/slidepuzzle on GitHub">Fork</a>
-            </div>
         </div>
-        <div id="console"></div>
-        
-        <script src="./jquery.min.js"></script>
-        <script src="./jquery.easing.js"></script>
-        <script src="./layout.js"></script>
-        <script src="./movements.js"></script>
-        <script src="./solution.js"></script>
-    </body>
+
+        <div class="github">
+            <a class="github-button" href="https://github.com/naumanumer/slidepuzzle" data-icon="octicon-star" data-size="large" data-show-count="true"
+                aria-label="Star naumanumer/slidepuzzle on GitHub">Star</a>
+
+            <a class="github-button" href="https://github.com/naumanumer/slidepuzzle/fork" data-icon="octicon-repo-forked" data-size="large"
+                aria-label="Fork naumanumer/slidepuzzle on GitHub">Fork</a>
+
+            <a class="github-button" href="https://github.com/naumanumer/slidepuzzle/issues" data-icon="octicon-issue-opened" data-size="large"
+                aria-label="Issue naumanumer/slidepuzzle on GitHub">Issue</a>
+        </div>
+    </div>
+    <div id="console"></div>
+
+    <script src="./jquery.min.js"></script>
+    <script src="./jquery.easing.js"></script>
+    <script src="./layout.js"></script>
+    <script src="./movements.js"></script>
+    <script src="./solution.js"></script>
+</body>
+
 </html>

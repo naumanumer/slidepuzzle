@@ -382,6 +382,8 @@ function moveTileOneStep(n,dir){
     //moveUsingMovesSync(moves);
 }
 
+
+
 // keyboard listener
 document.addEventListener("keydown", function (e) {
     var invertedKeys={'u':'d', 'd': 'u', 'l':'r', 'r': 'l'}
@@ -391,4 +393,23 @@ document.addEventListener("keydown", function (e) {
         move(invertedKeys[key]);
         return false;
     }
+})
+
+// Mouse listener
+$('#board .cell').click(function(e){
+    var tile = $(e.target)[0].id;
+    var dif = difTileDistance(0, tile)
+    var moves="";
+
+    if(dif.top == 0 && dif.left == -1) //hole is on left
+        moves = "r";
+    else if(dif.top == 0 && dif.left == 1) //hole is on right
+        moves = "l";
+    else if(dif.top == -1 && dif.left == 0) //hole is on top
+        moves = "d";
+    else if(dif.top == 1 && dif.left == 0) //hole is on down
+        moves = "u";
+
+    if(moves)
+        move(moves);
 })

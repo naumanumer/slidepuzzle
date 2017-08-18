@@ -36,7 +36,8 @@ $('#size').change(function() {
 
 
 writeOnConsole("Slide Puzzle (c) Nauman Umer");
-writeOnConsole("Info: Use Arrow keys to move tiles.", "rgb(97, 175, 255)");
+writeOnConsole("Info: Use Arrow keys to move tiles", "rgb(97, 175, 255)");
+writeOnConsole(" Or click on tile to move.", "rgb(97, 175, 255)");
 writeOnConsole("Warn: As game board and solver are", "rgb(245, 189, 0)");
 writeOnConsole(" working async so assigning two tasks", "rgb(245, 189, 0)");
 writeOnConsole(" at the same time can result any", "rgb(245, 189, 0)");

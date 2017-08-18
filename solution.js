@@ -149,10 +149,13 @@ function solve(){
     
     for(var n = size; n > 1; n--){
         if(n ==2){
+            writeOnConsole(`trying to solve 2x2 puzzle...`)
             moves += solve2x2();
         }else{
+            writeOnConsole("Reducing puzzle ...")
             moves +=  solveBottomLine(n);
             moves +=  solveRightLine(n);
+            writeOnConsole(`Puzzle reduced to ${n-1}x${n-1}`)
         }
     }
     restore(board);
@@ -162,6 +165,7 @@ function solve(){
         writeOnConsole(`Already Solved`);
     else
         writeOnConsole(`Solved in ${moves.length} moves`);
+    writeOnConsole(" ");
     return moves;
 }
 
@@ -186,7 +190,7 @@ function getAvgMoves() {
 
 // Optimization History (5x5)
 // +---+-----------+---------------------+----------------+----------------+
-// | # | avg moves | moves if algo fails |    faliure %   | Optimization % |
+// | # | avg moves | moves if algo fails |    failure %   | Optimization % |
 // +---+-----------+---------------------+----------------+----------------+
 // | 1 |    764    |       950-1150      | 0.6(0.3H,0.3S) |       0%       |
 // | 2 |    756    |       940-1140      | 0.6(0.3H,0.3S) |     0.01 %     |
