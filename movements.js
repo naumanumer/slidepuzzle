@@ -132,6 +132,7 @@ function shuffle(){
             move(dir);
             dir = moves[randomIntFromInterval(0,3)]
         }
+        move(moves[randomIntFromInterval(0,3)]);
         i--
     }
 }
@@ -396,7 +397,7 @@ document.addEventListener("keydown", function (e) {
 })
 
 // Mouse listener
-$('#board .cell').click(function(e){
+function listenMouse(e){
     var tile = $(e.target)[0].id;
     var dif = difTileDistance(0, tile)
     var moves="";
@@ -412,4 +413,4 @@ $('#board .cell').click(function(e){
 
     if(moves)
         move(moves);
-})
+}

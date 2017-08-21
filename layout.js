@@ -23,7 +23,7 @@ function initGame(s) {
         numberBoard.push(row)
     }
     $(board).html(boardHtml);
-
+    $('#board .cell').click((e)=> listenMouse(e))
     writeOnConsole(`Initialized ${size}x${size} board`);
 }
 
